@@ -6,14 +6,13 @@
     <title>Akmal Nosirov | Biznes jarayonlarini avtomatlashtirish mutaxassisi</title>
     <meta name="description" content="amoCRM, Bitrix24, IP telefoniya, SMS xizmatlari, AI tizimlar va Telegram botlar orqali biznes tizimlarini avtomatlashtirish." />
     <meta property="og:title" content="Akmal Nosirov | Biznes avtomatlashtirish mutaxassisi" />
-    <meta property="og:description" content="Siz ishlamang  Tizim ishlasin." />
+    <meta property="og:description" content="Siz ishlamang — Tizim ishlasin." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="./my_favicon.png" type="image/png">
 
     <style>
       :root {
@@ -100,9 +99,13 @@
         text-decoration: none;
         color: #fff;
         font-weight: 700;
-        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        font-size: clamp(0.95rem, 2.2vw, 1.15rem);
         white-space: nowrap;
         transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .brand-text {
+        white-space: nowrap;
       }
 
       .logo-brand:hover {
@@ -227,15 +230,37 @@
       }
 
       .hero-title {
-        font-size: clamp(2.1rem, 5.5vw, 4.2rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 980px;
+        margin: 0 auto 18px;
+        animation: flag-wave 4s ease-in-out infinite;
+      }
+
+      .hero-title-top,
+      .hero-title-bottom {
+        display: block;
+        width: 100%;
+        text-align: center;
         font-weight: 800;
         line-height: 1.15;
-        max-width: 980px;
-        margin-bottom: 16px;
+        letter-spacing: -0.02em;
         background: linear-gradient(180deg, #ffffff 40%, #c7d2fe 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: flag-wave 4s ease-in-out infinite;
+      }
+
+      .hero-title-top {
+        font-size: clamp(2.1rem, 5.5vw, 4.2rem);
+      }
+
+      .hero-title-bottom {
+        font-size: clamp(2.3rem, 6.2vw, 4.7rem);
+        margin-top: clamp(2px, 0.8vw, 6px);
       }
 
       .hero-subtext {
@@ -709,6 +734,541 @@
         line-height: 1.55;
       }
 
+      /* Portfolio Section Styles */
+      .portfolio-section {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: clamp(30px, 5vw, 50px) clamp(16px, 3vw, 24px) clamp(60px, 8vw, 80px);
+      }
+
+      .portfolio-filter-tabs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: clamp(24px, 4vw, 38px);
+      }
+
+      .port-tab-btn {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-secondary);
+        font-family: inherit;
+        font-size: clamp(0.78rem, 1.8vw, 0.88rem);
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        touch-action: manipulation;
+      }
+
+      .port-tab-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .port-tab-btn.active {
+        background: var(--accent-cyan);
+        color: #07080c;
+        border-color: var(--accent-cyan);
+        box-shadow: 0 4px 14px rgba(0, 240, 255, 0.3);
+      }
+
+      .portfolio-subsections-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(32px, 5vw, 48px);
+        width: 100%;
+      }
+
+      .portfolio-category-block {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        transition: opacity 0.3s ease;
+      }
+
+      .portfolio-category-block.is-hidden {
+        display: none !important;
+      }
+
+      .category-header-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        flex-wrap: wrap;
+      }
+
+      .category-title-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+        font-weight: 800;
+        color: #fff;
+      }
+
+      .category-title-badge .cat-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        flex-shrink: 0;
+      }
+
+      .category-subtitle {
+        font-size: clamp(0.8rem, 1.6vw, 0.88rem);
+        color: var(--text-muted);
+        max-width: 600px;
+        line-height: 1.45;
+      }
+
+      .portfolio-card {
+        background: linear-gradient(150deg, rgba(21, 24, 36, 0.85) 0%, rgba(12, 14, 22, 0.95) 100%);
+        border: 1px solid var(--border-subtle);
+        border-radius: clamp(16px, 3vw, 22px);
+        padding: clamp(18px, 3.5vw, 28px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, box-shadow 0.25s;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .portfolio-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .portfolio-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0, 240, 255, 0.4);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 25px rgba(0, 240, 255, 0.12);
+      }
+
+      .portfolio-card:hover::before {
+        opacity: 1;
+      }
+
+      .portfolio-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .portfolio-tag {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent-cyan);
+        background: rgba(0, 240, 255, 0.08);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        padding: 4px 10px;
+        border-radius: 12px;
+      }
+
+      .portfolio-tools {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .tool-pill {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        letter-spacing: 0.02em;
+      }
+
+      .tool-pill.cyan { border-color: rgba(0, 240, 255, 0.35); background: rgba(0, 240, 255, 0.1); color: #67e8f9; }
+      .tool-pill.purple { border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.12); color: #d8b4fe; }
+      .tool-pill.rose { border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12); color: #fda4af; }
+      .tool-pill.emerald { border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.12); color: #6ee7b7; }
+
+      /* Visual Mockup Container */
+      .portfolio-visual-mockup {
+        width: 100%;
+        border-radius: 14px;
+        background: rgba(6, 8, 14, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: clamp(12px, 2.5vw, 16px);
+        margin-bottom: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mockup-header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .mockup-dots {
+        display: flex;
+        gap: 5px;
+      }
+
+      .mockup-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+      }
+      .mockup-dot.red { background: #ef4444; }
+      .mockup-dot.yellow { background: #f59e0b; }
+      .mockup-dot.green { background: #10b981; }
+
+      .mockup-badge-tag {
+        font-size: 0.65rem;
+        font-family: monospace;
+        color: var(--accent-cyan);
+        background: rgba(0, 240, 255, 0.08);
+        padding: 2px 7px;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .mockup-graphic-stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 4px;
+        gap: clamp(6px, 1.8vw, 14px);
+        flex-wrap: wrap;
+      }
+
+      .visual-flow-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        min-width: 80px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .visual-flow-node:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-cyan);
+      }
+
+      .visual-flow-node .node-img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        margin-bottom: 4px;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+      }
+
+      .visual-flow-node .node-icon {
+        font-size: 1.25rem;
+        margin-bottom: 4px;
+        line-height: 1;
+      }
+
+      .visual-flow-node .node-name {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #f1f5f9;
+        white-space: nowrap;
+      }
+
+      .visual-flow-node .node-desc {
+        font-size: 0.62rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      .visual-flow-arrow {
+        color: var(--accent-cyan);
+        font-size: 1.15rem;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        animation: pulse-arrow 2s infinite ease-in-out;
+      }
+
+      @keyframes pulse-arrow {
+        0%, 100% { opacity: 0.4; transform: translateX(0); }
+        50% { opacity: 1; transform: translateX(3px); }
+      }
+
+      /* Telegram Chat Mockup Effect */
+      .tg-mockup-bubble {
+        background: rgba(30, 41, 59, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 12px 14px;
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      .tg-mockup-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .tg-mockup-header img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+      }
+
+      .tg-mockup-text {
+        font-size: 0.82rem;
+        color: #e2e8f0;
+        line-height: 1.45;
+      }
+
+      .tg-mockup-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .tg-btn-chip {
+        flex: 1;
+        text-align: center;
+        padding: 7px 10px;
+        border-radius: 8px;
+        background: rgba(0, 240, 255, 0.12);
+        border: 1px solid rgba(0, 240, 255, 0.35);
+        color: var(--accent-cyan);
+        font-size: 0.72rem;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+
+      .tg-btn-chip:hover {
+        background: rgba(0, 240, 255, 0.22);
+      }
+
+      /* Website Browser Frame Mockup */
+      .site-mockup-frame {
+        width: 100%;
+        border-radius: 10px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .site-url-bar {
+        font-family: monospace;
+        font-size: 0.72rem;
+        color: #94a3b8;
+        background: rgba(0, 0, 0, 0.45);
+        padding: 5px 12px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .speed-gauge-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #34d399;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 8px;
+      }
+
+      .visual-caption-tag {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.73rem;
+        color: var(--text-muted);
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      }
+
+      .visual-caption-tag svg {
+        flex-shrink: 0;
+        width: 14px;
+        height: 14px;
+        stroke: var(--accent-cyan);
+      }
+
+      .portfolio-title {
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+
+      .portfolio-flow-box {
+        background: rgba(7, 8, 12, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+      }
+
+      .portfolio-flow-box p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .portfolio-result-box {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: 12px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .portfolio-result-icon {
+        font-size: 1.15rem;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .portfolio-result-content {
+        flex: 1;
+      }
+
+      .portfolio-result-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #34d399;
+        margin-bottom: 3px;
+        display: block;
+      }
+
+      .portfolio-result-desc {
+        font-size: 0.84rem;
+        color: #e2e8f0;
+        line-height: 1.45;
+        margin: 0;
+        font-weight: 500;
+      }
+
+      @media (max-width: 640px) {
+        .portfolio-filter-tabs {
+          gap: 6px;
+        }
+        .port-tab-btn {
+          padding: 7px 12px;
+          font-size: 0.78rem;
+        }
+        .category-header-wrap {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+        .mockup-graphic-stage {
+          gap: 6px;
+        }
+        .visual-flow-node {
+          min-width: 68px;
+          padding: 6px 8px;
+        }
+        .visual-flow-node .node-img {
+          width: 26px;
+          height: 26px;
+        }
+        .visual-flow-node .node-name {
+          font-size: 0.68rem;
+        }
+        .visual-flow-node .node-desc {
+          font-size: 0.58rem;
+        }
+        .tg-mockup-bubble {
+          max-width: 100%;
+          padding: 10px 12px;
+        }
+        .tg-mockup-buttons {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .site-mockup-frame {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+        }
+        .site-url-bar {
+          justify-content: center;
+        }
+        .speed-gauge-badge {
+          justify-content: center;
+        }
+      }
+
       .form-section {
         position: relative;
         z-index: 10;
@@ -1098,7 +1658,7 @@
       <div class="header-container">
         <a href="http://t.me/AkmalNosirov" target="_blank" rel="noopener noreferrer" class="logo-brand" title="Akmal Nosirov (Telegram)">
           <span class="brand-dot"></span>
-          <span>Akmal Nosirov</span>
+          <span class="brand-text" data-i18n="header_brand">Akmal Nosirov</span>
         </a>
 
         <div class="header-right-actions">
@@ -1119,7 +1679,10 @@
       <!-- Hero Section -->
       <section class="hero-section">
         <div class="hero-tagline" data-i18n="hero_tagline">Biznes tizimlarini avtomatlashtirish</div>
-        <h1 class="hero-title" data-i18n="hero_title">Siz ishlamang  Tizim ishlasin</h1>
+        <h1 class="hero-title">
+          <span class="hero-title-top" data-i18n="hero_title_top">Siz ishlamang</span>
+          <span class="hero-title-bottom" data-i18n="hero_title_bottom">Tizim ishlasin</span>
+        </h1>
         <p class="hero-subtext" data-i18n="hero_subtext">
           AI tizimlar, amoCRM, Bitrix24, IP telefoniya, SMS xizmatlari va maxsus Telegram botlar orqali biznesingizni yangi bosqichga olib chiqamiz.
         </p>
@@ -1132,8 +1695,8 @@
           </div>
 
           <a href="http://t.me/AkmalNosirov" target="_blank" rel="noopener noreferrer" class="stage-avatar-box" title="Akmal Nosirov bilan bog'lanish (Telegram)">
-            <img src="my_face.png" alt="Akmal Nosirov" class="stage-avatar-img default-img" />
-            <img src="good%20job.png" alt="Akmal Nosirov - Great job!" class="stage-avatar-img victory-img" onerror="this.onerror=null; this.src='my_face.png';" />
+            <img src="/my_face.png" alt="Akmal Nosirov" class="stage-avatar-img default-img" />
+            <img src="/good%20job.png" alt="Akmal Nosirov - Great job!" class="stage-avatar-img victory-img" onerror="this.onerror=null; this.src='/my_face.png';" />
 
             <div class="thumbs-up-toast" id="thumbsUpToast">
               <span>👍</span>
@@ -1243,11 +1806,308 @@
         </div>
       </section>
 
+      <!-- Portfolio Section -->
+      <section id="portfolio" class="portfolio-section">
+        <div class="section-heading-wrap">
+          <div class="section-kicker" data-i18n="port_kicker">Amaliy Natijalar</div>
+          <h2 class="section-title" data-i18n="port_title">Keyslar & Ish Jarayonlari</h2>
+          <p class="section-desc" data-i18n="port_desc">
+            Integratsiyalar, avtomatlashtirish, Telegram botlar va veb-saytlar bo'yicha real mijozlar natijalari.
+          </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="portfolio-filter-tabs" role="tablist" aria-label="Portfolio Categories">
+          <button type="button" class="port-tab-btn active" data-filter="all" data-i18n="port_tab_all">Barchasi</button>
+          <button type="button" class="port-tab-btn" data-filter="integrations" data-i18n="port_tab_integrations">Integratsiyalar</button>
+          <button type="button" class="port-tab-btn" data-filter="automation" data-i18n="port_tab_automation">Avtomatlashtirish</button>
+          <button type="button" class="port-tab-btn" data-filter="bots" data-i18n="port_tab_bots">Telegram botlar</button>
+          <button type="button" class="port-tab-btn" data-filter="sites" data-i18n="port_tab_sites">Sayt yaratish</button>
+        </div>
+
+        <div class="portfolio-subsections-wrap">
+          <!-- Subsection 1: Integrations -->
+          <div class="portfolio-category-block" data-category="integrations">
+            <div class="category-header-wrap">
+              <div class="category-title-badge">
+                <span class="cat-icon">🔗</span>
+                <span data-i18n="cat_integ_title">Integratsiyalar</span>
+              </div>
+              <span class="category-subtitle" data-i18n="cat_integ_sub">Telefon, CRM va SMS bitta qulay tizimda bir-biri bilan ishlaydi.</span>
+            </div>
+
+            <div class="portfolio-card">
+              <div>
+                <div class="portfolio-card-header">
+                  <span class="portfolio-tag" data-i18n="port_case1_tag">01 // INTEGRATSIYALAR</span>
+                  <div class="portfolio-tools">
+                    <span class="tool-pill cyan">amoCRM</span>
+                    <span class="tool-pill cyan">OnlinePBX</span>
+                    <span class="tool-pill emerald">Eskiz SMS</span>
+                  </div>
+                </div>
+
+                <!-- Visual Mockup & Diagram -->
+                <div class="portfolio-visual-mockup">
+                  <div class="mockup-header-bar">
+                    <div class="mockup-dots">
+                      <span class="mockup-dot red"></span>
+                      <span class="mockup-dot yellow"></span>
+                      <span class="mockup-dot green"></span>
+                    </div>
+                    <span class="mockup-badge-tag" data-i18n="port_case1_badge">CRM • TELEFONIYA • SMS</span>
+                  </div>
+                  <div class="mockup-graphic-stage">
+                    <div class="visual-flow-node">
+                      <img src="src/assets/images/amocrm.png" alt="amoCRM" class="node-img" />
+                      <span class="node-name">amoCRM</span>
+                      <span class="node-desc" data-i18n="port_case1_node1_desc">Mijoz kartasi</span>
+                    </div>
+                    <span class="visual-flow-arrow">&rarr;</span>
+                    <div class="visual-flow-node">
+                      <img src="src/assets/images/onlinepbx.jpg" alt="OnlinePBX" class="node-img" />
+                      <span class="node-name">OnlinePBX</span>
+                      <span class="node-desc" data-i18n="port_case1_node2_desc">Qo'ng'iroq yozuvi</span>
+                    </div>
+                    <span class="visual-flow-arrow">&rarr;</span>
+                    <div class="visual-flow-node">
+                      <img src="src/assets/images/smseskiz.png" alt="Eskiz SMS" class="node-img" />
+                      <span class="node-name">Eskiz SMS</span>
+                      <span class="node-desc" data-i18n="port_case1_node3_desc">Avtomatik SMS</span>
+                    </div>
+                  </div>
+                  <div class="visual-caption-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span data-i18n="port_case1_vis">Vizual: Telefon, CRM va SMS o'rtasidagi avtomatik bog'lanish</span>
+                  </div>
+                </div>
+
+                <h3 class="portfolio-title" data-i18n="port_case1_title">Telefon, CRM va SMS tizimlarini birlashtirish</h3>
+                <div class="portfolio-flow-box">
+                  <p data-i18n="port_case1_flow">Mijoz telefon qilishi bilan uning ismi ekranda chiqadi, suhbat avtomatik yozib olinadi va mijozga darhol SMS boradi. Bitta ham mijoz yo'qolmaydi.</p>
+                </div>
+              </div>
+              <div class="portfolio-result-box">
+                <span class="portfolio-result-icon">⚡</span>
+                <div class="portfolio-result-content">
+                  <span class="portfolio-result-label" data-i18n="port_result_label">Natija</span>
+                  <p class="portfolio-result-desc" data-i18n="port_case1_metric">Barcha qo'ng'iroqlar nazoratda // Savdo +34% oshdi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subsection 2: Automation -->
+          <div class="portfolio-category-block" data-category="automation">
+            <div class="category-header-wrap">
+              <div class="category-title-badge">
+                <span class="cat-icon">⚙️</span>
+                <span data-i18n="cat_auto_title">Avtomatlashtirish</span>
+              </div>
+              <span class="category-subtitle" data-i18n="cat_auto_sub">Qo'lda bajariladigan ishlarni tizim avtomatik tarzda bajaradi.</span>
+            </div>
+
+            <div class="portfolio-card">
+              <div>
+                <div class="portfolio-card-header">
+                  <span class="portfolio-tag" data-i18n="port_case2_tag">02 // AVTOMATLASHTIRISH</span>
+                  <div class="portfolio-tools">
+                    <span class="tool-pill purple">Make.com</span>
+                    <span class="tool-pill rose">Asana</span>
+                    <span class="tool-pill cyan">Telegram</span>
+                  </div>
+                </div>
+
+                <!-- Visual Mockup & Diagram -->
+                <div class="portfolio-visual-mockup">
+                  <div class="mockup-header-bar">
+                    <div class="mockup-dots">
+                      <span class="mockup-dot red"></span>
+                      <span class="mockup-dot yellow"></span>
+                      <span class="mockup-dot green"></span>
+                    </div>
+                    <span class="mockup-badge-tag" data-i18n="port_case2_badge">MAKE • ASANA • TELEGRAM</span>
+                  </div>
+                  <div class="mockup-graphic-stage">
+                    <div class="visual-flow-node">
+                      <span class="node-icon">⚡</span>
+                      <span class="node-name" data-i18n="port_case2_node1_name">Yangi buyurtma</span>
+                      <span class="node-desc" data-i18n="port_case2_node1_desc">Sayt yoki botdan</span>
+                    </div>
+                    <span class="visual-flow-arrow">&rarr;</span>
+                    <div class="visual-flow-node">
+                      <span class="node-icon">🟣</span>
+                      <span class="node-name" data-i18n="port_case2_node2_name">Make.com</span>
+                      <span class="node-desc" data-i18n="port_case2_node2_desc">Avto-taqsimlash</span>
+                    </div>
+                    <span class="visual-flow-arrow">&rarr;</span>
+                    <div class="visual-flow-node">
+                      <span class="node-icon">🔴</span>
+                      <span class="node-name" data-i18n="port_case2_node3_name">Asana</span>
+                      <span class="node-desc" data-i18n="port_case2_node3_desc">Xodim vazifasi</span>
+                    </div>
+                    <span class="visual-flow-arrow">&rarr;</span>
+                    <div class="visual-flow-node">
+                      <img src="src/assets/images/telegram.webp" alt="Telegram" class="node-img" />
+                      <span class="node-name" data-i18n="port_case2_node4_name">Telegram</span>
+                      <span class="node-desc" data-i18n="port_case2_node4_desc">Kunlik hisobot</span>
+                    </div>
+                  </div>
+                  <div class="visual-caption-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span data-i18n="port_case2_vis">Vizual: Buyurtmadan boshlab xodimlarga vazifa taqsimlash jarayoni</span>
+                  </div>
+                </div>
+
+                <h3 class="portfolio-title" data-i18n="port_case2_title">Xodimlarga vazifalarni avtomatik taqsimlash</h3>
+                <div class="portfolio-flow-box">
+                  <p data-i18n="port_case2_flow">Yangi buyurtma tushishi bilan tizim xodimlarga avtomatik vazifa ochadi, muddatini eslatadi va har kuni kechqurun rahbarning telefoniga qisqa hisobot jo'natadi. Bosh og'rig'isiz boshqaruv.</p>
+                </div>
+              </div>
+              <div class="portfolio-result-box">
+                <span class="portfolio-result-icon">⚡</span>
+                <div class="portfolio-result-content">
+                  <span class="portfolio-result-label" data-i18n="port_result_label">Natija</span>
+                  <p class="portfolio-result-desc" data-i18n="port_case2_metric">Haftasiga 18 soat tejaladi // Barcha ishlar o'z vaqtida</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subsection 3: Telegram Bots -->
+          <div class="portfolio-category-block" data-category="bots">
+            <div class="category-header-wrap">
+              <div class="category-title-badge">
+                <span class="cat-icon">🤖</span>
+                <span data-i18n="cat_bots_title">Telegram botlar</span>
+              </div>
+              <span class="category-subtitle" data-i18n="cat_bots_sub">Mijozlarga 24/7 xizmat ko'rsatish va to'lovlarni qabul qilish.</span>
+            </div>
+
+            <div class="portfolio-card">
+              <div>
+                <div class="portfolio-card-header">
+                  <span class="portfolio-tag" data-i18n="port_case3_tag">03 // TELEGRAM BOTLAR</span>
+                  <div class="portfolio-tools">
+                    <span class="tool-pill cyan">Telegram Bot</span>
+                    <span class="tool-pill emerald">Click / Payme</span>
+                    <span class="tool-pill purple">CRM Ulanish</span>
+                  </div>
+                </div>
+
+                <!-- Visual Mockup & Diagram -->
+                <div class="portfolio-visual-mockup">
+                  <div class="mockup-header-bar">
+                    <div class="mockup-dots">
+                      <span class="mockup-dot red"></span>
+                      <span class="mockup-dot yellow"></span>
+                      <span class="mockup-dot green"></span>
+                    </div>
+                    <span class="mockup-badge-tag" data-i18n="port_case3_badge">TELEGRAM_24_7_DO'KON</span>
+                  </div>
+                  <div class="tg-mockup-bubble">
+                    <div class="tg-mockup-header">
+                      <img src="src/assets/images/telegram.webp" alt="Telegram" />
+                      <span data-i18n="port_case3_botname">Smart Buyurtma Boti</span>
+                      <span style="color: #34d399; font-size: 0.7rem;" data-i18n="port_case3_online">● Online</span>
+                    </div>
+                    <div class="tg-mockup-text" data-i18n="port_case3_chatmsg">
+                      Buyurtmangiz muvaffaqiyatli shakllantirildi! To'lov turini tanlang:
+                    </div>
+                    <div class="tg-mockup-buttons">
+                      <div class="tg-btn-chip" data-i18n="port_case3_btn1">💳 Click bilan to'lash</div>
+                      <div class="tg-btn-chip" data-i18n="port_case3_btn2">🔹 Payme bilan to'lash</div>
+                    </div>
+                  </div>
+                  <div class="visual-caption-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span data-i18n="port_case3_vis">Vizual: Telegram ichida to'lov va buyurtma oynasi</span>
+                  </div>
+                </div>
+
+                <h3 class="portfolio-title" data-i18n="port_case3_title">24/7 ishlaydigan savdo va buyurtma boti</h3>
+                <div class="portfolio-flow-box">
+                  <p data-i18n="port_case3_flow">Mijozlar Telegram ichida mahsulotlarni tanlaydi va Click yoki Payme orqali to'laydi. Bot tungi vaqtda ham xodimlar yordamisiz avtomatik sotadi va arizani yetkazib beruvchiga uzatadi.</p>
+                </div>
+              </div>
+              <div class="portfolio-result-box">
+                <span class="portfolio-result-icon">⚡</span>
+                <div class="portfolio-result-content">
+                  <span class="portfolio-result-label" data-i18n="port_result_label">Natija</span>
+                  <p class="portfolio-result-desc" data-i18n="port_case3_metric">Buyurtma olish 1 daqiqa // Xodimlar yuki 65% kamaydi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subsection 4: Site Building -->
+          <div class="portfolio-category-block" data-category="sites">
+            <div class="category-header-wrap">
+              <div class="category-title-badge">
+                <span class="cat-icon">🌐</span>
+                <span data-i18n="cat_sites_title">Sayt yaratish</span>
+              </div>
+              <span class="category-subtitle" data-i18n="cat_sites_sub">Telefonda 1 soniyada ochiluvchi, xaridor jalb qiladigan saytlar.</span>
+            </div>
+
+            <div class="portfolio-card">
+              <div>
+                <div class="portfolio-card-header">
+                  <span class="portfolio-tag" data-i18n="port_case4_tag">04 // SAYT YARATISH</span>
+                  <div class="portfolio-tools">
+                    <span class="tool-pill cyan" data-i18n="port_case4_pill1">Zamonaviy Dizayn</span>
+                    <span class="tool-pill emerald" data-i18n="port_case4_pill2">99/100 Tezlik</span>
+                    <span class="tool-pill purple" data-i18n="port_case4_pill3">Telegram Xabar</span>
+                  </div>
+                </div>
+
+                <!-- Visual Mockup & Diagram -->
+                <div class="portfolio-visual-mockup">
+                  <div class="mockup-header-bar">
+                    <div class="mockup-dots">
+                      <span class="mockup-dot red"></span>
+                      <span class="mockup-dot yellow"></span>
+                      <span class="mockup-dot green"></span>
+                    </div>
+                    <span class="mockup-badge-tag" data-i18n="port_case4_badge">TEZKOR_SOTUVCHI_SAYT</span>
+                  </div>
+                  <div class="site-mockup-frame">
+                    <div class="site-url-bar">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+                      <span>https://biznesingiz.uz</span>
+                    </div>
+                    <div class="speed-gauge-badge">
+                      <span data-i18n="port_case4_speed">⚡ 99/100 Google Tezlik</span>
+                    </div>
+                  </div>
+                  <div class="visual-caption-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span data-i18n="port_case4_vis">Vizual: Telefonda 1 soniyada ochiluvchi sotuvchi sayt</span>
+                  </div>
+                </div>
+
+                <h3 class="portfolio-title" data-i18n="port_case4_title">Telefon va kompyuter uchun qulay sotuvchi sayt</h3>
+                <div class="portfolio-flow-box">
+                  <p data-i18n="port_case4_flow">1 soniyada ochiluvchi, chiroyli va qulay veb-sayt. Saytga kirgan mijoz telefon raqamini qoldirishi bilan ma'lumotlar darhol sizning Telegramingizga kelib tushadi.</p>
+                </div>
+              </div>
+              <div class="portfolio-result-box">
+                <span class="portfolio-result-icon">⚡</span>
+                <div class="portfolio-result-content">
+                  <span class="portfolio-result-label" data-i18n="port_result_label">Natija</span>
+                  <p class="portfolio-result-desc" data-i18n="port_case4_metric">1 soniyada ochilish // Murojaatlar 2.8 barobar oshdi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Registration Form Section -->
       <section id="register" class="form-section">
         <div class="form-card">
           <div class="form-header-wrap">
-            <h2 data-i18n="form_title">Ro'yxatdan o'tish arizasi</h2>
+            <h2 data-i18n="form_title">Ro'yhatdan o'tish</h2>
             <p data-i18n="form_desc">Kerakli xizmatlarni tanlang va loyihangizni tahlil qilish uchun ma'lumotlaringizni qoldiring.</p>
           </div>
 
@@ -1256,7 +2116,7 @@
               <label for="fullName" class="form-label">
                 <span data-i18n="field_name">To'liq ismingiz</span> <span class="req">*</span>
               </label>
-              <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Masalan: Akmal Nosirov" required autocomplete="name" />
+              <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Masalan: Akmal Nosirov" data-i18n-placeholder="placeholder_name" required autocomplete="name" />
               <div class="field-error-msg" id="nameError" data-i18n="val_name">Iltimos, to'liq ismingizni kiriting (kamida 2 ta belgi).</div>
             </div>
 
@@ -1387,7 +2247,7 @@
 
     <!-- Site Footer -->
     <footer class="site-footer">
-      <p>&copy; 2026 Akmal Nosirov. Barcha huquqlar himoyalangan.</p>
+      <p data-i18n="footer_copyright">© 2026 Akmal Nosirov. Barcha huquqlar himoyalangan</p>
     </footer>
 
     <!-- INTERACTIVE SCRIPT LOGIC -->
@@ -1396,9 +2256,12 @@
         // Translations Dictionary
         const i18nData = {
           uz: {
+            header_brand: "Akmal Nosirov",
             nav_apply: "Ariza qoldirish",
             hero_tagline: "Biznes tizimlarini avtomatlashtirish",
-            hero_title: "Siz ishlamang  Tizim ishlasin",
+            hero_title_top: "Siz ishlamang",
+            hero_title_bottom: "Tizim ishlasin",
+            hero_title: "Siz ishlamang\nTizim ishlasin",
             hero_subtext: "AI tizimlar, amoCRM, Bitrix24, IP telefoniya, SMS xizmatlari va maxsus Telegram botlar orqali biznesingizni yangi bosqichga olib chiqamiz.",
             hero_cta: "Ariza topshirish",
             stage_hint: "Xizmatlarni tanlang va savatga tashlang!",
@@ -1420,9 +2283,71 @@
             serv5_d: "Eskiz SMS va PlayMobile orqali ommaviy xabarnomalar, OTP kodlar, eslatmalar va CRM avtomatik SMS integratsiyasi.",
             serv6_t: "Maxsus Telegram botlar",
             serv6_d: "Mijozlarga xizmat ko'rsatish, to'lovlar, avtomatik buyurtmalar va CRM tizimlari bilan to'liq ikki tomonlama integratsiya.",
-            form_title: "Ro'yxatdan o'tish arizasi",
+            port_kicker: "Amaliy Natijalar",
+            port_title: "Keyslar & Ish Jarayonlari",
+            port_desc: "Integratsiyalar, avtomatlashtirish, Telegram botlar va veb-saytlar bo'yicha real mijozlar natijalari.",
+            port_tab_all: "Barchasi",
+            port_tab_integrations: "Integratsiyalar",
+            port_tab_automation: "Avtomatlashtirish",
+            port_tab_bots: "Telegram botlar",
+            port_tab_sites: "Sayt yaratish",
+            cat_integ_title: "Integratsiyalar",
+            cat_integ_sub: "Telefon, CRM va SMS bitta qulay tizimda bir-biri bilan ishlaydi.",
+            cat_auto_title: "Avtomatlashtirish",
+            cat_auto_sub: "Qo'lda bajariladigan ishlarni tizim avtomatik tarzda bajaradi.",
+            cat_bots_title: "Telegram botlar",
+            cat_bots_sub: "Mijozlarga 24/7 xizmat ko'rsatish va to'lovlarni qabul qilish.",
+            cat_sites_title: "Sayt yaratish",
+            cat_sites_sub: "Telefonda 1 soniyada ochiluvchi, xaridor jalb qiladigan saytlar.",
+            port_result_label: "Natija",
+            port_case1_tag: "01 // INTEGRATSIYALAR",
+            port_case1_badge: "CRM • TELEFONIYA • SMS",
+            port_case1_node1_desc: "Mijoz kartasi",
+            port_case1_node2_desc: "Qo'ng'iroq yozuvi",
+            port_case1_node3_desc: "Avtomatik SMS",
+            port_case1_title: "Telefon, CRM va SMS tizimlarini birlashtirish",
+            port_case1_vis: "Vizual: Telefon, CRM va SMS o'rtasidagi avtomatik bog'lanish",
+            port_case1_flow: "Mijoz telefon qilishi bilan uning ismi ekranda chiqadi, suhbat avtomatik yozib olinadi va mijozga darhol SMS boradi. Bitta ham mijoz yo'qolmaydi.",
+            port_case1_metric: "Barcha qo'ng'iroqlar nazoratda // Savdo +34% oshdi",
+            port_case2_tag: "02 // AVTOMATLASHTIRISH",
+            port_case2_badge: "MAKE • ASANA • TELEGRAM",
+            port_case2_node1_name: "Yangi buyurtma",
+            port_case2_node1_desc: "Sayt yoki botdan",
+            port_case2_node2_name: "Make.com",
+            port_case2_node2_desc: "Avto-taqsimlash",
+            port_case2_node3_name: "Asana",
+            port_case2_node3_desc: "Xodim vazifasi",
+            port_case2_node4_name: "Telegram",
+            port_case2_node4_desc: "Kunlik hisobot",
+            port_case2_title: "Xodimlarga vazifalarni avtomatik taqsimlash",
+            port_case2_vis: "Vizual: Buyurtmadan boshlab xodimlarga vazifa taqsimlash jarayoni",
+            port_case2_flow: "Yangi buyurtma tushishi bilan tizim xodimlarga avtomatik vazifa ochadi, muddatini eslatadi va har kuni kechqurun rahbarning telefoniga qisqa hisobot jo'natadi. Bosh og'rig'isiz boshqaruv.",
+            port_case2_metric: "Haftasiga 18 soat tejaladi // Barcha ishlar o'z vaqtida",
+            port_case3_tag: "03 // TELEGRAM BOTLAR",
+            port_case3_badge: "TELEGRAM_24_7_DO'KON",
+            port_case3_botname: "Smart Buyurtma Boti",
+            port_case3_online: "● Online",
+            port_case3_chatmsg: "Buyurtmangiz muvaffaqiyatli shakllantirildi! To'lov turini tanlang:",
+            port_case3_btn1: "💳 Click bilan to'lash",
+            port_case3_btn2: "🔹 Payme bilan to'lash",
+            port_case3_title: "24/7 ishlaydigan savdo va buyurtma boti",
+            port_case3_vis: "Vizual: Telegram ichida to'lov va buyurtma oynasi",
+            port_case3_flow: "Mijozlar Telegram ichida mahsulotlarni tanlaydi va Click yoki Payme orqali to'laydi. Bot tungi vaqtda ham xodimlar yordamisiz avtomatik sotadi va arizani yetkazib beruvchiga uzatadi.",
+            port_case3_metric: "Buyurtma olish 1 daqiqa // Xodimlar yuki 65% kamaydi",
+            port_case4_tag: "04 // SAYT YARATISH",
+            port_case4_badge: "TEZKOR_SOTUVCHI_SAYT",
+            port_case4_pill1: "Zamonaviy Dizayn",
+            port_case4_pill2: "99/100 Tezlik",
+            port_case4_pill3: "Telegram Xabar",
+            port_case4_speed: "⚡ 99/100 Google Tezlik",
+            port_case4_title: "Telefon va kompyuter uchun qulay sotuvchi sayt",
+            port_case4_vis: "Vizual: Telefonda 1 soniyada ochiluvchi sotuvchi sayt",
+            port_case4_flow: "1 soniyada ochiluvchi, chiroyli va qulay veb-sayt. Saytga kirgan mijoz telefon raqamini qoldirishi bilan ma'lumotlar darhol sizning Telegramingizga kelib tushadi.",
+            port_case4_metric: "1 soniyada ochilish // Murojaatlar 2.8 barobar oshdi",
+            form_title: "Ro'yhatdan o'tish",
             form_desc: "Kerakli xizmatlarni tanlang va loyihangizni tahlil qilish uchun ma'lumotlaringizni qoldiring.",
             field_name: "To'liq ismingiz",
+            placeholder_name: "Masalan: Akmal Nosirov",
             field_phone: "Telefon raqamingiz",
             field_services: "Kerakli mahsulotlar / Xizmatlar",
             services_hint: "Bir yoki bir nechta xizmatni tanlang:",
@@ -1439,12 +2364,16 @@
             toast_success_title: "Muvaffaqiyatli!",
             toast_success_desc: "Arizangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.",
             toast_error_title: "Xatolik",
-            toast_error_desc: "Iltimos, barcha majburiy maydonlarni to'g'ri to'ldiring."
+            toast_error_desc: "Iltimos, barcha majburiy maydonlarni to'g'ri to'ldiring.",
+            footer_copyright: "© 2026 Akmal Nosirov. Barcha huquqlar himoyalangan"
           },
           ru: {
+            header_brand: "Akmal Nosirov",
             nav_apply: "Оставить заявку",
             hero_tagline: "Автоматизация бизнес-процессов",
-            hero_title: "Вы не работайте  Пусть работает система",
+            hero_title_top: "Вы не работайте",
+            hero_title_bottom: "Пусть работает система",
+            hero_title: "Вы не работайте\nПусть работает система",
             hero_subtext: "Выведем ваш бизнес на новый уровень с помощью AI, amoCRM, Bitrix24, IP-телефонии, SMS и Telegram-ботов.",
             hero_cta: "Подать заявку",
             stage_hint: "Выберите услуги и добавьте их в корзину!",
@@ -1466,9 +2395,71 @@
             serv5_d: "Массовые рассылки, OTP-коды, напоминания и авто-SMS через Eskiz и PlayMobile.",
             serv6_t: "Telegram боты",
             serv6_d: "Обслуживание клиентов, платежи, заказы и полная интеграция с CRM.",
-            form_title: "Заявка на регистрацию",
+            port_kicker: "Практические Результаты",
+            port_title: "Кейсы и Практика",
+            port_desc: "Реальные результаты клиентов в интеграциях, автоматизации, Telegram-ботах и веб-разработке.",
+            port_tab_all: "Все",
+            port_tab_integrations: "Интеграции",
+            port_tab_automation: "Автоматизация",
+            port_tab_bots: "Telegram боты",
+            port_tab_sites: "Создание сайтов",
+            cat_integ_title: "Интеграции",
+            cat_integ_sub: "Телефон, CRM и SMS работают вместе в единой системе.",
+            cat_auto_title: "Автоматизация",
+            cat_auto_sub: "Система сама выполняет рутинную работу без участия человека.",
+            cat_bots_title: "Telegram боты",
+            cat_bots_sub: "Приём заказов и оплата через Telegram 24 часа в сутки.",
+            cat_sites_title: "Создание сайтов",
+            cat_sites_sub: "Быстрые сайты для телефонов и ПК с моментальной загрузкой.",
+            port_result_label: "Результат",
+            port_case1_tag: "01 // ИНТЕГРАЦИИ",
+            port_case1_badge: "CRM • ТЕЛЕФОНИЯ • SMS",
+            port_case1_node1_desc: "Карточка клиента",
+            port_case1_node2_desc: "Запись звонка",
+            port_case1_node3_desc: "Авто-SMS клиенту",
+            port_case1_title: "Связка CRM, телефонии и SMS",
+            port_case1_vis: "Визуал: Автоматическая связь звонков, карточки клиента и SMS",
+            port_case1_flow: "При входящем звонке имя клиента сразу появляется на экране, разговор записывается, а клиенту уходит SMS. Ни один клиент не потеряется.",
+            port_case1_metric: "Все звонки под контролем // Продажи выросли на +34%",
+            port_case2_tag: "02 // АВТОМАТИЗАЦИЯ",
+            port_case2_badge: "MAKE • ASANA • TELEGRAM",
+            port_case2_node1_name: "Новый заказ",
+            port_case2_node1_desc: "С сайта или бота",
+            port_case2_node2_name: "Make.com",
+            port_case2_node2_desc: "Авто-робот",
+            port_case2_node3_name: "Asana",
+            port_case2_node3_desc: "Задача сотруднику",
+            port_case2_node4_name: "Telegram",
+            port_case2_node4_desc: "Отчёт руководителю",
+            port_case2_title: "Автоматическая передача задач сотрудникам",
+            port_case2_vis: "Визуал: Процесс авто-распределения задач от заказа до отчёта",
+            port_case2_flow: "При новом заказе система сама ставит задачи сотрудникам, напоминает о сроках и каждый вечер присылает отчёт руководителю. Без ручного контроля.",
+            port_case2_metric: "Экономия 18 часов в неделю // Все дела сдаются вовремя",
+            port_case3_tag: "03 // TELEGRAM БОТЫ",
+            port_case3_badge: "TELEGRAM_МАГАЗИН_24_7",
+            port_case3_botname: "Умный бот заказов",
+            port_case3_online: "● В сети",
+            port_case3_chatmsg: "Ваш заказ успешно сформирован! Выберите способ оплаты:",
+            port_case3_btn1: "💳 Оплата через Click",
+            port_case3_btn2: "🔹 Оплата через Payme",
+            port_case3_title: "Круглосуточный бот приёма заказов и оплат",
+            port_case3_vis: "Визуал: Окно выбора товара и быстрой оплаты в Telegram",
+            port_case3_flow: "Покупатели выбирают товары прямо в Telegram и оплачивают через Click или Payme. Бот продает даже ночью без участия оператора и передает заказ курьеру.",
+            port_case3_metric: "Заказ за 1 минуту // Нагрузка на операторов снизилась на 65%",
+            port_case4_tag: "04 // СОЗДАНИЕ САЙТОВ",
+            port_case4_badge: "БЫСТРЫЙ_ПРОДАЮЩИЙ_САЙТ",
+            port_case4_pill1: "Современный дизайн",
+            port_case4_pill2: "99/100 Скорость",
+            port_case4_pill3: "Заявки в Telegram",
+            port_case4_speed: "⚡ 99/100 Скорость Google",
+            port_case4_title: "Продающий сайт для компьютеров и телефонов",
+            port_case4_vis: "Визуал: Сайт с моментальной загрузкой за 1 секунду",
+            port_case4_flow: "Красивый и быстрый сайт, открывающийся за 1 секунду. Как только клиент оставляет номер телефона, заявка мгновенно приходит прямо в ваш Telegram.",
+            port_case4_metric: "Загрузка за 1 секунду // Заявок стало в 2.8 раза больше",
+            form_title: "Регистрация",
             form_desc: "Выберите нужные услуги и оставьте контакты для анализа вашего проекта.",
             field_name: "Ваше имя",
+            placeholder_name: "Например: Акмал Носиров",
             field_phone: "Номер телефона",
             field_services: "Необходимые услуги / Продукты",
             services_hint: "Выберите одну или несколько услуг:",
@@ -1485,12 +2476,16 @@
             toast_success_title: "Успешно!",
             toast_success_desc: "Ваша заявка принята. Мы свяжемся с вами в ближайшее время.",
             toast_error_title: "Ошибка",
-            toast_error_desc: "Пожалуйста, правильно заполните все обязательные поля."
+            toast_error_desc: "Пожалуйста, правильно заполните все обязательные поля.",
+            footer_copyright: "© 2026 Akmal Nosirov. Все права защищены"
           },
           en: {
+            header_brand: "Akmal Nosirov",
             nav_apply: "Submit Application",
             hero_tagline: "Business Process Automation",
-            hero_title: "Don't Work Let the System Work",
+            hero_title_top: "Don't Work",
+            hero_title_bottom: "Let the System Work",
+            hero_title: "Don't Work\nLet the System Work",
             hero_subtext: "Elevate your business with AI systems, amoCRM, Bitrix24, IP telephony, SMS gateways, and custom Telegram bots.",
             hero_cta: "Apply Now",
             stage_hint: "Select services and drop them into the basket!",
@@ -1512,9 +2507,71 @@
             serv5_d: "Bulk messaging, OTP codes, reminders, and CRM-triggered SMS via Eskiz & PlayMobile.",
             serv6_t: "Custom Telegram Bots",
             serv6_d: "Customer support, payment processing, automated orders, and bi-directional CRM sync.",
-            form_title: "Registration Form",
+            port_kicker: "Client Results",
+            port_title: "Portfolio & Case Studies",
+            port_desc: "Real client results across integrations, automation, Telegram bots, and site building.",
+            port_tab_all: "All",
+            port_tab_integrations: "Integrations",
+            port_tab_automation: "Automation",
+            port_tab_bots: "Telegram Bots",
+            port_tab_sites: "Site Building",
+            cat_integ_title: "Integrations",
+            cat_integ_sub: "Phone, CRM, and SMS working together in one unified system.",
+            cat_auto_title: "Automation",
+            cat_auto_sub: "The system handles routine manual tasks automatically.",
+            cat_bots_title: "Telegram Bots",
+            cat_bots_sub: "Automated ordering and instant payments in Telegram 24/7.",
+            cat_sites_title: "Site Building",
+            cat_sites_sub: "Blazing fast websites that open in 1 second and convert visitors.",
+            port_result_label: "Result",
+            port_case1_tag: "01 // INTEGRATIONS",
+            port_case1_badge: "CRM • TELEPHONY • SMS",
+            port_case1_node1_desc: "Client Profile",
+            port_case1_node2_desc: "Call Recording",
+            port_case1_node3_desc: "Automatic SMS",
+            port_case1_title: "Connecting CRM, Phone Calls & SMS",
+            port_case1_vis: "Visual: Automatic connection between calls, CRM, and SMS",
+            port_case1_flow: "When a customer calls, their details appear instantly on screen, the call is recorded, and an automatic SMS is sent. No lead is ever lost.",
+            port_case1_metric: "All calls under control // Sales increased by +34%",
+            port_case2_tag: "02 // AUTOMATION",
+            port_case2_badge: "MAKE • ASANA • TELEGRAM",
+            port_case2_node1_name: "New Order",
+            port_case2_node1_desc: "From site or bot",
+            port_case2_node2_name: "Make.com",
+            port_case2_node2_desc: "Auto-routing",
+            port_case2_node3_name: "Asana",
+            port_case2_node3_desc: "Staff Task",
+            port_case2_node4_name: "Telegram",
+            port_case2_node4_desc: "Daily Report",
+            port_case2_title: "Automatic Task Assignment for Your Team",
+            port_case2_vis: "Visual: Automatic task delegation flow from new deal to daily digest",
+            port_case2_flow: "As soon as a new order arrives, the system assigns tasks to team members, sets deadlines, and sends a daily summary to the CEO. Zero micromanagement.",
+            port_case2_metric: "18+ hours saved weekly // 100% tasks delivered on time",
+            port_case3_tag: "03 // TELEGRAM BOTS",
+            port_case3_badge: "TELEGRAM_24_7_STORE",
+            port_case3_botname: "Smart Order Bot",
+            port_case3_online: "● Online",
+            port_case3_chatmsg: "Your order is successfully created! Choose payment method:",
+            port_case3_btn1: "💳 Pay via Click",
+            port_case3_btn2: "🔹 Pay via Payme",
+            port_case3_title: "24/7 Sales & Automated Order Bot",
+            port_case3_vis: "Visual: In-chat catalog and online checkout interface",
+            port_case3_flow: "Customers browse goods and pay via Click or Payme directly inside Telegram. The bot sells 24/7 without needing a support agent and dispatches orders.",
+            port_case3_metric: "Checkout in 1 minute // Support workload reduced by 65%",
+            port_case4_tag: "04 // SITE BUILDING",
+            port_case4_badge: "FAST_RESPONSIVE_WEBSITE",
+            port_case4_pill1: "Modern Design",
+            port_case4_pill2: "99/100 Speed",
+            port_case4_pill3: "Telegram Alerts",
+            port_case4_speed: "⚡ 99/100 Google Speed",
+            port_case4_title: "High-Converting Website for Mobile & Desktop",
+            port_case4_vis: "Visual: Responsive website loading in 1 second",
+            port_case4_flow: "A sleek, modern website that opens in 1 second. Every phone number submitted by visitors is delivered to your Telegram immediately.",
+            port_case4_metric: "1-second load time // Inquiries increased by 2.8x",
+            form_title: "Registration",
             form_desc: "Select required services and leave your contact details for project analysis.",
             field_name: "Full Name",
+            placeholder_name: "For example: Akmal Nosirov",
             field_phone: "Phone Number",
             field_services: "Required Services / Products",
             services_hint: "Select one or more services:",
@@ -1531,18 +2588,26 @@
             toast_success_title: "Success!",
             toast_success_desc: "Your application was submitted. We will contact you shortly.",
             toast_error_title: "Error",
-            toast_error_desc: "Please complete all required fields correctly."
+            toast_error_desc: "Please complete all required fields correctly.",
+            footer_copyright: "© 2026 Akmal Nosirov. All rights reserved."
           }
         };
 
+        // Reset theme storage to guarantee clean dark mode
+        try {
+          localStorage.removeItem('akmal_theme');
+          document.documentElement.removeAttribute('data-theme');
+        } catch (e) {}
+
         let currentLang = 'uz';
 
-        // Button Click Audio & Haptics Pool
+        // High-compatibility Audio Engine (Audio Element Pool with MP3/WAV/OGG + Web Audio API synthesizer for instant response across iOS, Android, and Desktop)
+        const audioSrc = '/button_click.mp3';
         const audioPool = [
-          new Audio('/button_click.ogg'),
-          new Audio('/button_click.ogg'),
-          new Audio('/button_click.ogg'),
-          new Audio('/button_click.ogg')
+          new Audio(audioSrc),
+          new Audio(audioSrc),
+          new Audio(audioSrc),
+          new Audio(audioSrc)
         ];
         audioPool.forEach(sound => {
           sound.preload = 'auto';
@@ -1550,30 +2615,126 @@
         });
         let audioPoolIndex = 0;
 
+        let synthAudioCtx = null;
+        const getAudioContext = () => {
+          try {
+            if (!synthAudioCtx) {
+              const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+              if (AudioContextClass) {
+                synthAudioCtx = new AudioContextClass();
+              }
+            }
+            if (synthAudioCtx && synthAudioCtx.state === 'suspended') {
+              synthAudioCtx.resume().catch(() => {});
+            }
+          } catch (e) {}
+          return synthAudioCtx;
+        };
+
+        // Unlock audio context and audio element on very first user gesture (critical for iOS Safari, WebViews, and mobile Chrome)
+        const unlockAudioOnFirstInteraction = () => {
+          try {
+            const ctx = getAudioContext();
+            if (ctx) {
+              if (ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+              }
+              // Play a zero-volume buffer to ensure the hardware audio thread is active
+              const buffer = ctx.createBuffer(1, 1, 22050);
+              const source = ctx.createBufferSource();
+              source.buffer = buffer;
+              source.connect(ctx.destination);
+              source.start(0);
+            }
+            if (audioPool && audioPool.length > 0) {
+              const prime = audioPool[0].play();
+              if (prime !== undefined) {
+                prime.then(() => {
+                  audioPool[0].pause();
+                  audioPool[0].currentTime = 0;
+                }).catch(() => {});
+              }
+            }
+          } catch (e) {}
+          document.removeEventListener('pointerdown', unlockAudioOnFirstInteraction);
+          document.removeEventListener('touchstart', unlockAudioOnFirstInteraction);
+          document.removeEventListener('click', unlockAudioOnFirstInteraction);
+        };
+        document.addEventListener('pointerdown', unlockAudioOnFirstInteraction, { once: true, passive: true });
+        document.addEventListener('touchstart', unlockAudioOnFirstInteraction, { once: true, passive: true });
+        document.addEventListener('click', unlockAudioOnFirstInteraction, { once: true, passive: true });
+
+        // Synthesized tactile click for instant low-latency playback across all devices
+        const playSynthClick = () => {
+          try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(820, now);
+            osc.frequency.exponentialRampToValueAtTime(150, now + 0.04);
+            gain.gain.setValueAtTime(0.26, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.04);
+          } catch (e) {}
+        };
+
+        // Haptic Vibration with Graceful Fallback on Unsupported Platforms (iOS, desktop Macs/PCs, restricted environments)
+        const triggerHapticFeedback = (duration = 20) => {
+          try {
+            if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && 'vibrate' in navigator && typeof navigator.vibrate === 'function') {
+              navigator.vibrate(duration);
+            }
+          } catch (e) {
+            // Gracefully skipped on platforms without vibration support (iOS Safari, macOS, Windows desktop)
+          }
+        };
+
+        let lastFeedbackTimestamp = 0;
         const playButtonClickAudio = () => {
-          // 1. Synchronously trigger .play() directly inside the user click event listener for desktop browser policy compliance
+          const now = Date.now();
+          if (now - lastFeedbackTimestamp < 60) return; // Prevent double-fire jitter
+          lastFeedbackTimestamp = now;
+
+          // 1. Safe haptic feedback (Android & supported mobile devices; fails gracefully on iOS/desktop)
+          triggerHapticFeedback(20);
+
+          // 2. Play tactile audio click with immediate Web Audio API fallback for 100% device compatibility
           try {
             const sound = audioPool[audioPoolIndex];
             audioPoolIndex = (audioPoolIndex + 1) % audioPool.length;
             sound.currentTime = 0;
             const playPromise = sound.play();
             if (playPromise !== undefined) {
-              playPromise.catch(() => {});
+              playPromise.catch(() => {
+                playSynthClick();
+              });
             }
-          } catch (e) {}
-
-          // 2. Haptic Feedback via Vibration API (gracefully skipped if not supported)
-          try {
-            if (navigator.vibrate) {
-              navigator.vibrate(50);
-            }
-          } catch (e) {}
+          } catch (e) {
+            playSynthClick();
+          }
         };
+
+        // Universal button click sound & haptics across all devices
+        document.addEventListener('click', (e) => {
+          const interactiveElement = e.target.closest(
+            'button, a, .port-tab-btn, .lang-btn, .nav-cta-btn, .cta-btn-primary, .service-card, .tool-pill, .social-circle-link, .social-main-trigger, .tg-btn-chip, .pyramid-block-btn, .product-checkbox-label, .reset-basket-btn, .reset-pyramid-btn, .form-submit-btn, [role="button"], input[type="submit"], input[type="button"]'
+          );
+          if (interactiveElement) {
+            playButtonClickAudio();
+          }
+        }, { passive: true });
 
         // Set / Switch Language Handler
         const switchLanguage = (lang) => {
           if (!i18nData[lang]) return;
           currentLang = lang;
+          document.documentElement.lang = lang;
           document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
           });
@@ -1584,6 +2745,22 @@
               el.textContent = i18nData[lang][key];
             }
           });
+
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (i18nData[lang][key]) {
+              el.placeholder = i18nData[lang][key];
+            }
+          });
+
+          const fullNameInput = document.getElementById('fullName');
+          if (fullNameInput && i18nData[lang].placeholder_name) {
+            fullNameInput.placeholder = i18nData[lang].placeholder_name;
+          }
+
+          if (i18nData[lang].header_brand) {
+            document.title = i18nData[lang].header_brand;
+          }
         };
         const setLanguage = switchLanguage;
 
@@ -1591,6 +2768,24 @@
           btn.addEventListener('click', () => {
             playButtonClickAudio();
             switchLanguage(btn.getAttribute('data-lang'));
+          });
+        });
+
+        // Portfolio Category Filter Tabs
+        document.querySelectorAll('.port-tab-btn').forEach(tabBtn => {
+          tabBtn.addEventListener('click', () => {
+            playButtonClickAudio();
+            document.querySelectorAll('.port-tab-btn').forEach(b => b.classList.remove('active'));
+            tabBtn.classList.add('active');
+
+            const filter = tabBtn.getAttribute('data-filter');
+            document.querySelectorAll('.portfolio-category-block').forEach(catBlock => {
+              if (filter === 'all' || catBlock.getAttribute('data-category') === filter) {
+                catBlock.classList.remove('is-hidden');
+              } else {
+                catBlock.classList.add('is-hidden');
+              }
+            });
           });
         });
 
@@ -1610,18 +2805,18 @@
         // Pyramid Blocks Definition
         const ALL_BLOCKS = [
           // Tier 1 (Top)
-          { id: 'AITools', label: 'AI Tools', colorClass: 'color-ai', icon: 'ai.webp', tier: 1 },
+          { id: 'AITools', label: 'AI Tools', colorClass: 'color-ai', icon: '/ai.webp', tier: 1 },
           // Tier 2
-          { id: 'amoCRM', label: 'amoCRM', colorClass: 'color-amocrm', icon: 'amocrm.png', tier: 2 },
-          { id: 'Bitrix24', label: 'Bitrix24', colorClass: 'color-bitrix', icon: 'bitrix24.png', tier: 2 },
+          { id: 'amoCRM', label: 'amoCRM', colorClass: 'color-amocrm', icon: '/amocrm.png', tier: 2 },
+          { id: 'Bitrix24', label: 'Bitrix24', colorClass: 'color-bitrix', icon: '/bitrix24.png', tier: 2 },
           // Tier 3
-          { id: 'OnlinePBX', label: 'OnlinePBX', colorClass: 'color-onlinepbx', icon: 'onlinepbx.jpg', tier: 3 },
-          { id: 'Sipuni', label: 'Sipuni', colorClass: 'color-sipuni', icon: 'sipuni.jpg', tier: 3 },
+          { id: 'OnlinePBX', label: 'OnlinePBX', colorClass: 'color-onlinepbx', icon: '/onlinepbx.jpg', tier: 3 },
+          { id: 'Sipuni', label: 'Sipuni', colorClass: 'color-sipuni', icon: '/sipuni.jpg', tier: 3 },
           { id: 'Utel', label: 'Utel', colorClass: 'color-utel', icon: '/utel.png', tier: 3 },
           // Tier 4 (Bottom)
-          { id: 'SMSEskiz', label: 'SMS Eskiz', colorClass: 'color-eskiz', icon: 'smseskiz.png', tier: 4 },
-          { id: 'SMSPlayMobile', label: 'SMS PlayMobile', colorClass: 'color-playmobile', icon: 'smsplaymobile.png', tier: 4 },
-          { id: 'TelegramBots', label: 'Telegram Bots', colorClass: 'color-telegram', icon: 'telegram.webp', tier: 4 }
+          { id: 'SMSEskiz', label: 'SMS Eskiz', colorClass: 'color-eskiz', icon: '/smseskiz.png', tier: 4 },
+          { id: 'SMSPlayMobile', label: 'SMS PlayMobile', colorClass: 'color-playmobile', icon: '/smsplaymobile.png', tier: 4 },
+          { id: 'TelegramBots', label: 'Telegram Bots', colorClass: 'color-telegram', icon: '/telegram.webp', tier: 4 }
         ];
 
         let collectedBlocks = [];
