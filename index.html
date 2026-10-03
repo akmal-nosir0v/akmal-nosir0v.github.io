@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/my_favicon.png">
+    <link rel="icon" type="image/png" href="my_favicon.png">
 
     <style>
       :root {
@@ -38,13 +38,16 @@
         padding: 0;
       }
 
-      html, body {
+      html {
         width: 100%;
         min-height: 100%;
-        overflow-x: hidden;
+        overflow-x: clip;
       }
 
       body {
+        width: 100%;
+        min-height: 100%;
+        overflow-x: clip;
         background-color: var(--bg-deep);
         color: var(--text-primary);
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -73,13 +76,22 @@
       }
 
       .header-nav {
+        position: -webkit-sticky;
         position: sticky;
         top: 0;
-        z-index: 50;
-        backdrop-filter: blur(14px);
-        background: rgba(7, 8, 12, 0.85);
-        border-bottom: 1px solid var(--border-subtle);
+        z-index: 1000;
         width: 100%;
+        background: rgba(7, 8, 12, 0.9);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-subtle);
+        transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .header-nav.scrolled {
+        background: rgba(7, 8, 12, 0.96);
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
       }
 
       .header-container {
@@ -2646,7 +2658,7 @@
 
         let currentLang = 'uz';
 
-        // High-compatibility Audio Engine (Audio Element Pool with MP3/WAV/OGG + Web Audio API synthesizer for instant response across iOS, Android, and Desktop)
+        // High-compatibility Audio Engine with button_click.ogg + Web Audio API buffer & HTML5 Audio fallback
         const audioSrc = '/button_click.ogg';
         const audioPool = [
           new Audio(audioSrc),
@@ -2656,9 +2668,10 @@
         ];
         audioPool.forEach(sound => {
           sound.preload = 'auto';
-          sound.volume = 0.7;
+          sound.volume = 0.75;
         });
         let audioPoolIndex = 0;
+        let oggAudioBuffer = null;
 
         let synthAudioCtx = null;
         const getAudioContext = () => {
@@ -2676,6 +2689,29 @@
           return synthAudioCtx;
         };
 
+        // Preload and decode button_click.ogg into Web Audio API buffer for true instant zero-latency playback
+        const preloadOggBuffer = () => {
+          try {
+            fetch(audioSrc)
+              .then(res => {
+                if (!res.ok) throw new Error('Audio fetch status ' + res.status);
+                return res.arrayBuffer();
+              })
+              .then(arrayBuffer => {
+                const ctx = getAudioContext();
+                if (ctx) {
+                  ctx.decodeAudioData(
+                    arrayBuffer,
+                    (decoded) => { oggAudioBuffer = decoded; },
+                    () => {}
+                  );
+                }
+              })
+              .catch(() => {});
+          } catch (e) {}
+        };
+        preloadOggBuffer();
+
         // Unlock audio context and audio element on very first user gesture (critical for iOS Safari, WebViews, and mobile Chrome)
         const unlockAudioOnFirstInteraction = () => {
           try {
@@ -2683,6 +2719,9 @@
             if (ctx) {
               if (ctx.state === 'suspended') {
                 ctx.resume().catch(() => {});
+              }
+              if (!oggAudioBuffer) {
+                preloadOggBuffer();
               }
               // Play a zero-volume buffer to ensure the hardware audio thread is active
               const buffer = ctx.createBuffer(1, 1, 22050);
@@ -2730,7 +2769,7 @@
         };
 
         // Haptic Vibration with Graceful Fallback on Unsupported Platforms (iOS, desktop Macs/PCs, restricted environments)
-        const triggerHapticFeedback = (duration = 20) => {
+        const triggerHapticFeedback = (duration = 18) => {
           try {
             if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && 'vibrate' in navigator && typeof navigator.vibrate === 'function') {
               navigator.vibrate(duration);
@@ -2743,32 +2782,49 @@
         let lastFeedbackTimestamp = 0;
         const playButtonClickAudio = () => {
           const now = Date.now();
-          if (now - lastFeedbackTimestamp < 60) return; // Prevent double-fire jitter
+          if (now - lastFeedbackTimestamp < 50) return; // Prevent double-fire jitter
           lastFeedbackTimestamp = now;
 
-          // 1. Safe haptic feedback (Android & supported mobile devices; fails gracefully on iOS/desktop)
-          triggerHapticFeedback(20);
+          // 1. Safe haptic vibration feedback (Android & supported mobile devices; fails gracefully on iOS/desktop)
+          triggerHapticFeedback(18);
 
-          // 2. Play tactile audio click with immediate Web Audio API fallback for 100% device compatibility
+          // 2. Play button_click.ogg sound effect with zero-latency Web Audio API or HTML5 Audio pool fallback
+          let played = false;
           try {
-            const sound = audioPool[audioPoolIndex];
-            audioPoolIndex = (audioPoolIndex + 1) % audioPool.length;
-            sound.currentTime = 0;
-            const playPromise = sound.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(() => {
-                playSynthClick();
-              });
+            const ctx = getAudioContext();
+            if (ctx && oggAudioBuffer) {
+              const source = ctx.createBufferSource();
+              source.buffer = oggAudioBuffer;
+              const gainNode = ctx.createGain();
+              gainNode.gain.setValueAtTime(0.8, ctx.currentTime);
+              source.connect(gainNode);
+              gainNode.connect(ctx.destination);
+              source.start(0);
+              played = true;
             }
-          } catch (e) {
-            playSynthClick();
+          } catch (e) {}
+
+          if (!played) {
+            try {
+              const sound = audioPool[audioPoolIndex];
+              audioPoolIndex = (audioPoolIndex + 1) % audioPool.length;
+              sound.currentTime = 0;
+              const playPromise = sound.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                  playSynthClick();
+                });
+              }
+            } catch (e) {
+              playSynthClick();
+            }
           }
         };
 
         // Universal button click sound & haptics across all devices
         document.addEventListener('click', (e) => {
           const interactiveElement = e.target.closest(
-            'button, a, .port-tab-btn, .lang-btn, .nav-cta-btn, .cta-btn-primary, .service-card, .tool-pill, .social-circle-link, .social-main-trigger, .tg-btn-chip, .pyramid-block-btn, .product-checkbox-label, .reset-basket-btn, .reset-pyramid-btn, .form-submit-btn, [role="button"], input[type="submit"], input[type="button"]'
+            'button, a, .port-tab-btn, .lang-btn, .nav-cta-btn, .cta-btn-primary, .service-card, .tool-pill, .social-circle-link, .social-main-trigger, .tg-btn-chip, .pyramid-block-btn, .product-checkbox-label, .reset-basket-btn, .reset-pyramid-btn, .form-submit-btn, [role="button"], input[type="submit"], input[type="button"], input[type="checkbox"], input[type="radio"]'
           );
           if (interactiveElement) {
             playButtonClickAudio();
@@ -3212,6 +3268,16 @@
             submitArrow.style.display = 'inline-block';
           }
         });
+
+        // Sticky Header Scroll State
+        const updateHeaderScroll = () => {
+          const header = document.querySelector('.header-nav');
+          if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 15);
+          }
+        };
+        window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+        updateHeaderScroll();
       });
     </script>
   </body>
